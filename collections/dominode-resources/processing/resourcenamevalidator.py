@@ -5,43 +5,42 @@ from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
     QgsProcessingException,
+    QgsProcessingParameterMapLayer,
     QgsProcessingParameterString,
     QgsProcessingOutputString,
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
 
-class DomiNodeResourceNameChecker(QgsProcessingAlgorithm):
-    """
-    This is an example algorithm that takes a vector layer,
-    creates some new layers and returns some results.
-    """
+class DomiNodeResourceNameValidator(QgsProcessingAlgorithm):
 
-    INPUT_RESOURCE_NAME = 'INPUT'
+    INPUT_RESOURCE_NAME = 'INPUT_NAME'
+    INPUT_RESOURCE_LAYER = 'INPUT_LAYER'
     OUTPUT_DEPARTMENT_ID = 'OUTPUT_DEPARTMENT_ID'
     OUTPUT_DATASET_ID = 'OUTPUT_DATASET_ID'
     OUTPUT_COLLECTION_ID = 'OUTPUT_COLLECTION_ID'
     OUTPUT_VERSION = 'OUTPUT_VERSION'
     OUTPUT_COLLECTION_VERSION = 'OUTPUT_COLLECTION_VERSION'
+    OUTPUT_DATASET_NAME = 'OUTPUT_DATASET_NAME'
     OUTPUT_DB_STAGING_SCHEMA_NAME = 'OUTPUT_DB_STAGING_SCHEMA_NAME'
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
-        return DomiNodeResourceNameChecker()
+        return DomiNodeResourceNameValidator()
 
     def name(self):
         """
         Returns the unique algorithm name.
         """
-        return 'resourcenamechecker'
+        return 'resourcenamevalidator'
 
     def displayName(self):
         """
         Returns the translated algorithm name.
         """
-        return self.tr('Select staging schema name')
+        return self.tr('Validate resource name')
 
     def group(self):
         """
@@ -70,6 +69,14 @@ class DomiNodeResourceNameChecker(QgsProcessingAlgorithm):
             QgsProcessingParameterString(
                 self.INPUT_RESOURCE_NAME,
                 self.tr('Name of DomiNode resource'),
+                optional=True
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterMapLayer(
+                self.INPUT_RESOURCE_LAYER,
+                self.tr('Loaded DomiNode resource'),
+                optional=True
             )
         )
         self.addOutput(
@@ -104,6 +111,12 @@ class DomiNodeResourceNameChecker(QgsProcessingAlgorithm):
         )
         self.addOutput(
             QgsProcessingOutputString(
+                self.OUTPUT_DATASET_NAME,
+                self.tr('Dataset name')
+            )
+        )
+        self.addOutput(
+            QgsProcessingOutputString(
                 self.OUTPUT_DB_STAGING_SCHEMA_NAME,
                 self.tr('Department staging schema name on the DB')
             )
@@ -111,27 +124,42 @@ class DomiNodeResourceNameChecker(QgsProcessingAlgorithm):
 
 
     def processAlgorithm(self, parameters, context, feedback):
-        resource_name = self.parameterAsString(
-            parameters, self.INPUT_RESOURCE_NAME, context)
+        resource = self.parameterAsLayer(
+            parameters, self.INPUT_RESOURCE_LAYER, context)
+        feedback.pushInfo(f'resource: {resource}')
+        if resource is not None:
+            resource_name = resource.name()
+        else:
+            resource_name = self.parameterAsString(
+                parameters, self.INPUT_RESOURCE_NAME, context)
+        feedback.pushInfo(f'resource_name: {resource_name}')
+
         parts = resource_name.split('_')
         result = {
             self.OUTPUT_VERSION: None,
             self.OUTPUT_COLLECTION_ID: None,
             self.OUTPUT_COLLECTION_VERSION: None,
+            self.OUTPUT_DATASET_NAME: resource_name,
         }
         if len(parts) == 4:
-            department, collection_id, dataset_id, collection_version = parts
+            department, collection_id, dataset_id, version_suffix = parts
+            collection_version, format_suffix = get_format_suffix(
+                version_suffix)
             result.update({
                 self.OUTPUT_COLLECTION_ID: collection_id,
                 self.OUTPUT_COLLECTION_VERSION: collection_version,
             })
         elif len(parts) == 3:
-            department, dataset_id, version = parts
+            department, dataset_id, version_suffix = parts
+            version, format_suffix = get_format_suffix(version_suffix)
             result.update({
                 self.OUTPUT_VERSION: version,
             })
         else:
             raise QgsProcessingException(f'Invalid name {resource_name!r}')
+        if format_suffix is not None:
+            result[self.OUTPUT_DATASET_NAME] = resource_name.replace(
+                format_suffix, '')
         result.update({
             self.OUTPUT_DEPARTMENT_ID: department,
             self.OUTPUT_DATASET_ID: dataset_id,
@@ -146,3 +174,11 @@ def validate_name_sections(
         feedback
 ) -> bool:
     return True
+
+
+def get_format_suffix(version_part: str) -> typing.Tuple[str, str]:
+    format_parts = version_part.split('.')[3:]
+    format_suffix = ''
+    if len(format_parts) != 0:
+        format_suffix = '.' + '.'.join(format_parts)
+    return version_part.replace(format_suffix, ''), format_suffix
