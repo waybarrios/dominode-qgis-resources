@@ -19,14 +19,36 @@
       <Option type="Map" name="params">
         <Option type="List" name="DATABASE">
           <Option type="Map">
-            <Option type="QString" value="dbconnectionname" name="parameter_name"/>
-            <Option type="int" value="0" name="source"/>
+            <Option type="QString" value="script:expressiontostringconverter_1" name="child_id"/>
+            <Option type="QString" value="OUTPUT" name="output_name"/>
+            <Option type="int" value="1" name="source"/>
           </Option>
         </Option>
         <Option type="List" name="SQL">
           <Option type="Map">
             <Option type="QString" value="format(&#xa;    'SELECT DomiNodeCopyTableBackToStagingSchema(%1public.%2%3%2%1, %1%4.%2%5%2%1)',&#xa;&#x9;char(39),&#xa;&#x9;char(34),&#xa;&#x9;@Validate_input_name_OUTPUT_DATASET_NAME,&#xa;&#x9;if(&#xa;&#x9;&#x9;@tocommonstaging,&#xa;&#x9;&#x9;'dominode_staging',&#xa;&#x9;&#x9; @Validate_output_name_OUTPUT_DB_STAGING_SCHEMA_NAME&#xa;&#x9; ),&#xa;&#x9;@Validate_output_name_OUTPUT_DATASET_NAME&#xa;)" name="expression"/>
             <Option type="int" value="3" name="source"/>
+          </Option>
+        </Option>
+      </Option>
+    </Option>
+    <Option type="Map" name="script:expressiontostringconverter_1">
+      <Option type="bool" value="true" name="active"/>
+      <Option name="alg_config"/>
+      <Option type="QString" value="script:expressiontostringconverter" name="alg_id"/>
+      <Option type="QString" value="Convert expression to string" name="component_description"/>
+      <Option type="double" value="775" name="component_pos_x"/>
+      <Option type="double" value="200" name="component_pos_y"/>
+      <Option name="dependencies"/>
+      <Option type="QString" value="script:expressiontostringconverter_1" name="id"/>
+      <Option name="outputs"/>
+      <Option type="bool" value="true" name="outputs_collapsed"/>
+      <Option type="bool" value="true" name="parameters_collapsed"/>
+      <Option type="Map" name="params">
+        <Option type="List" name="INPUT">
+          <Option type="Map">
+            <Option type="QString" value="dbconnectionname2" name="parameter_name"/>
+            <Option type="int" value="0" name="source"/>
           </Option>
         </Option>
       </Option>
@@ -52,8 +74,8 @@
         </Option>
         <Option type="List" name="INPUT_NAME">
           <Option type="Map">
-            <Option type="int" value="2" name="source"/>
-            <Option type="QString" value="" name="static_value"/>
+            <Option type="QString" value="Inputtablename" name="parameter_name"/>
+            <Option type="int" value="0" name="source"/>
           </Option>
         </Option>
       </Option>
@@ -91,29 +113,38 @@
   <Option type="QString" value="DomiNode" name="model_group"/>
   <Option type="QString" value="copy table back to staging DB schema" name="model_name"/>
   <Option type="Map" name="parameterDefinitions">
-    <Option type="Map" name="dbconnectionname">
+    <Option type="Map" name="Inputtablename">
       <Option type="QString" value="" name="default"/>
-      <Option type="QString" value="db connection name" name="description"/>
-      <Option type="int" value="0" name="flags"/>
+      <Option type="QString" value="Input table name" name="description"/>
+      <Option type="int" value="8" name="flags"/>
       <Option name="metadata"/>
       <Option type="bool" value="false" name="multiline"/>
-      <Option type="QString" value="dbconnectionname" name="name"/>
+      <Option type="QString" value="Inputtablename" name="name"/>
       <Option type="QString" value="string" name="parameter_type"/>
+    </Option>
+    <Option type="Map" name="dbconnectionname2">
+      <Option type="QString" value=" @dominode_db_connection_name " name="default"/>
+      <Option type="QString" value="DB connection name" name="description"/>
+      <Option type="int" value="0" name="flags"/>
+      <Option name="metadata"/>
+      <Option type="QString" value="dbconnectionname2" name="name"/>
+      <Option type="QString" value="expression" name="parameter_type"/>
+      <Option type="QString" value="" name="parent_layer"/>
     </Option>
     <Option type="Map" name="inputlayer">
       <Option type="List" name="data_types">
         <Option type="int" value="-1"/>
       </Option>
       <Option type="invalid" name="default"/>
-      <Option type="QString" value="input layer" name="description"/>
-      <Option type="int" value="0" name="flags"/>
+      <Option type="QString" value="Input layer" name="description"/>
+      <Option type="int" value="8" name="flags"/>
       <Option name="metadata"/>
       <Option type="QString" value="inputlayer" name="name"/>
       <Option type="QString" value="vector" name="parameter_type"/>
     </Option>
     <Option type="Map" name="outputname">
       <Option type="QString" value="" name="default"/>
-      <Option type="QString" value="output name" name="description"/>
+      <Option type="QString" value="Output name" name="description"/>
       <Option type="int" value="0" name="flags"/>
       <Option name="metadata"/>
       <Option type="bool" value="false" name="multiline"/>
@@ -122,7 +153,7 @@
     </Option>
     <Option type="Map" name="tocommonstaging">
       <Option type="bool" value="false" name="default"/>
-      <Option type="QString" value="to common staging" name="description"/>
+      <Option type="QString" value="Place in common staging" name="description"/>
       <Option type="int" value="0" name="flags"/>
       <Option name="metadata"/>
       <Option type="QString" value="tocommonstaging" name="name"/>
@@ -130,16 +161,22 @@
     </Option>
   </Option>
   <Option type="Map" name="parameters">
-    <Option type="Map" name="dbconnectionname">
-      <Option type="QString" value="dbconnectionname" name="component_description"/>
-      <Option type="double" value="764" name="component_pos_x"/>
-      <Option type="double" value="122" name="component_pos_y"/>
-      <Option type="QString" value="dbconnectionname" name="name"/>
+    <Option type="Map" name="Inputtablename">
+      <Option type="QString" value="Inputtablename" name="component_description"/>
+      <Option type="double" value="336" name="component_pos_x"/>
+      <Option type="double" value="170" name="component_pos_y"/>
+      <Option type="QString" value="Inputtablename" name="name"/>
+    </Option>
+    <Option type="Map" name="dbconnectionname2">
+      <Option type="QString" value="dbconnectionname2" name="component_description"/>
+      <Option type="double" value="765" name="component_pos_x"/>
+      <Option type="double" value="112" name="component_pos_y"/>
+      <Option type="QString" value="dbconnectionname2" name="name"/>
     </Option>
     <Option type="Map" name="inputlayer">
       <Option type="QString" value="inputlayer" name="component_description"/>
-      <Option type="double" value="276" name="component_pos_x"/>
-      <Option type="double" value="115" name="component_pos_y"/>
+      <Option type="double" value="159" name="component_pos_x"/>
+      <Option type="double" value="106" name="component_pos_y"/>
       <Option type="QString" value="inputlayer" name="name"/>
     </Option>
     <Option type="Map" name="outputname">
