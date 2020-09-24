@@ -1,0 +1,140 @@
+<!DOCTYPE model>
+<Option type="Map">
+  <Option name="children" type="Map">
+    <Option name="qgis:postgisexecutesql_1" type="Map">
+      <Option value="true" name="active" type="bool"/>
+      <Option name="alg_config"/>
+      <Option value="qgis:postgisexecutesql" name="alg_id" type="QString"/>
+      <Option value="PostgreSQL execute SQL" name="component_description" type="QString"/>
+      <Option value="721" name="component_pos_x" type="double"/>
+      <Option value="583" name="component_pos_y" type="double"/>
+      <Option name="dependencies" type="StringList">
+        <Option value="script:expressiontostringconverter_1" type="QString"/>
+        <Option value="script:resourcenamevalidator_1" type="QString"/>
+      </Option>
+      <Option value="qgis:postgisexecutesql_1" name="id" type="QString"/>
+      <Option name="outputs"/>
+      <Option value="true" name="outputs_collapsed" type="bool"/>
+      <Option value="true" name="parameters_collapsed" type="bool"/>
+      <Option name="params" type="Map">
+        <Option name="DATABASE" type="List">
+          <Option type="Map">
+            <Option value="script:expressiontostringconverter_1" name="child_id" type="QString"/>
+            <Option value="OUTPUT" name="output_name" type="QString"/>
+            <Option value="1" name="source" type="int"/>
+          </Option>
+        </Option>
+        <Option name="SQL" type="List">
+          <Option type="Map">
+            <Option value="format(&#xa;    'INSERT INTO lsd_topomaps.qgis_projects SELECT \'%1\', metadata, content FROM  %2.qgis_projects WHERE name = \'%3\'',&#xa;&#x9;@Validate_resource_name_OUTPUT_DATASET_NAME, &#xa;&#x9;format(&#xa;&#x9;    '%1_staging',&#xa;&#x9;    array_first(string_to_array(@Inputprojectname, '_'))&#xa;&#x9;),&#xa;&#x9;@Inputprojectname  &#x9; &#xa;)" name="expression" type="QString"/>
+            <Option value="3" name="source" type="int"/>
+          </Option>
+        </Option>
+      </Option>
+    </Option>
+    <Option name="script:expressiontostringconverter_1" type="Map">
+      <Option value="true" name="active" type="bool"/>
+      <Option name="alg_config"/>
+      <Option value="script:expressiontostringconverter" name="alg_id" type="QString"/>
+      <Option value="Convert expression to string" name="component_description" type="QString"/>
+      <Option value="120" name="component_pos_x" type="double"/>
+      <Option value="160" name="component_pos_y" type="double"/>
+      <Option name="dependencies"/>
+      <Option value="script:expressiontostringconverter_1" name="id" type="QString"/>
+      <Option name="outputs"/>
+      <Option value="true" name="outputs_collapsed" type="bool"/>
+      <Option value="true" name="parameters_collapsed" type="bool"/>
+      <Option name="params" type="Map">
+        <Option name="INPUT" type="List">
+          <Option type="Map">
+            <Option value="dbconnectionname" name="parameter_name" type="QString"/>
+            <Option value="0" name="source" type="int"/>
+          </Option>
+        </Option>
+      </Option>
+    </Option>
+    <Option name="script:resourcenamevalidator_1" type="Map">
+      <Option value="true" name="active" type="bool"/>
+      <Option name="alg_config"/>
+      <Option value="script:resourcenamevalidator" name="alg_id" type="QString"/>
+      <Option value="Validate resource name" name="component_description" type="QString"/>
+      <Option value="443" name="component_pos_x" type="double"/>
+      <Option value="198" name="component_pos_y" type="double"/>
+      <Option name="dependencies"/>
+      <Option value="script:resourcenamevalidator_1" name="id" type="QString"/>
+      <Option name="outputs"/>
+      <Option value="true" name="outputs_collapsed" type="bool"/>
+      <Option value="true" name="parameters_collapsed" type="bool"/>
+      <Option name="params" type="Map">
+        <Option name="INPUT_LAYER" type="List">
+          <Option type="Map">
+            <Option value="2" name="source" type="int"/>
+            <Option name="static_value" type="invalid"/>
+          </Option>
+        </Option>
+        <Option name="INPUT_NAME" type="List">
+          <Option type="Map">
+            <Option value="projectname" name="parameter_name" type="QString"/>
+            <Option value="0" name="source" type="int"/>
+          </Option>
+        </Option>
+      </Option>
+    </Option>
+  </Option>
+  <Option name="help" type="Map">
+    <Option value="" name="ALG_DESC" type="QString"/>
+    <Option value="This model will copy a QGIS project to the lsd_topomaps schema. This is the schema that is used for publishing DomiNode topomaps" name="SHORT_DESCRIPTION" type="QString"/>
+  </Option>
+  <Option name="modelVariables"/>
+  <Option value="DomiNode" name="model_group" type="QString"/>
+  <Option value="Save project in topomaps schema" name="model_name" type="QString"/>
+  <Option name="parameterDefinitions" type="Map">
+    <Option name="Inputprojectname" type="Map">
+      <Option value="" name="default" type="QString"/>
+      <Option value="input project name" name="description" type="QString"/>
+      <Option value="0" name="flags" type="int"/>
+      <Option name="metadata"/>
+      <Option value="false" name="multiline" type="bool"/>
+      <Option value="Inputprojectname" name="name" type="QString"/>
+      <Option value="string" name="parameter_type" type="QString"/>
+    </Option>
+    <Option name="dbconnectionname" type="Map">
+      <Option value=" @dominode_db_connection_name " name="default" type="QString"/>
+      <Option value="DB connection name" name="description" type="QString"/>
+      <Option value="0" name="flags" type="int"/>
+      <Option name="metadata"/>
+      <Option value="dbconnectionname" name="name" type="QString"/>
+      <Option value="expression" name="parameter_type" type="QString"/>
+      <Option value="" name="parent_layer" type="QString"/>
+    </Option>
+    <Option name="projectname" type="Map">
+      <Option value="" name="default" type="QString"/>
+      <Option value="output project name" name="description" type="QString"/>
+      <Option value="0" name="flags" type="int"/>
+      <Option name="metadata"/>
+      <Option value="false" name="multiline" type="bool"/>
+      <Option value="projectname" name="name" type="QString"/>
+      <Option value="string" name="parameter_type" type="QString"/>
+    </Option>
+  </Option>
+  <Option name="parameters" type="Map">
+    <Option name="Inputprojectname" type="Map">
+      <Option value="Inputprojectname" name="component_description" type="QString"/>
+      <Option value="796" name="component_pos_x" type="double"/>
+      <Option value="147" name="component_pos_y" type="double"/>
+      <Option value="Inputprojectname" name="name" type="QString"/>
+    </Option>
+    <Option name="dbconnectionname" type="Map">
+      <Option value="dbconnectionname" name="component_description" type="QString"/>
+      <Option value="120" name="component_pos_x" type="double"/>
+      <Option value="60" name="component_pos_y" type="double"/>
+      <Option value="dbconnectionname" name="name" type="QString"/>
+    </Option>
+    <Option name="projectname" type="Map">
+      <Option value="projectname" name="component_description" type="QString"/>
+      <Option value="340" name="component_pos_x" type="double"/>
+      <Option value="60" name="component_pos_y" type="double"/>
+      <Option value="projectname" name="name" type="QString"/>
+    </Option>
+  </Option>
+</Option>
