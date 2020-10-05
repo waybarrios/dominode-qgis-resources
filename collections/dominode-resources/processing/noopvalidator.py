@@ -8,7 +8,7 @@ from qgis.core import (
 from qgis.PyQt.QtCore import QCoreApplication
 
 
-class Legacy(QgsProcessingAlgorithm):
+class NoopValidator(QgsProcessingAlgorithm):
 
     INPUT = 'INPUT'
     OUTPUT = 'OUTPUT'
@@ -17,19 +17,19 @@ class Legacy(QgsProcessingAlgorithm):
         return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
-        return Legacy()
+        return NoopValidator()
 
     def name(self):
         """
         Returns the unique algorithm name.
         """
-        return 'legacy'
+        return 'noopvalidator'
 
     def displayName(self):
         """
         Returns the translated algorithm name.
         """
-        return self.tr('Legacy')
+        return self.tr('Always returns True')
 
     def group(self):
         """
@@ -49,10 +49,19 @@ class Legacy(QgsProcessingAlgorithm):
         Returns a localised short help string for the algorithm.
         """
         return self.tr(
-            'Always returns True'
+            'Algorithm that always returns true,'
+            'It is intended to be used in validation '
+            'of DomiNode legacy datasets.'
         )
 
     def initAlgorithm(self, config=None):
+        self.addParameter(
+            QgsProcessingParameterExpression(
+                self.INPUT,
+                self.tr('Input'),
+                optional=True
+            )
+        )
         self.addOutput(
             QgsProcessingOutputString(
                 self.OUTPUT,

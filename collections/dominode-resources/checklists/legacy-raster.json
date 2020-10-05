@@ -7,11 +7,11 @@
     {
       "name": "legacy",
       "description": "Check for legacy raster datasets.",
-      "guide": "This check will always defaults to True, it hasq been added for the validation of validation of those datasets that were previously on the legacy DomiNode",
+      "guide": "This check will always defaults to True, it has been added for the validation of DomiNode legacy raster datasests",
       "automation": {
         "algorithm_id": "script:legacy",
         "artifact_parameter_name": "INPUT",
-        "output_name": "Result"
+        "output_name": "OUTPUT"
       }
     }
   ],
