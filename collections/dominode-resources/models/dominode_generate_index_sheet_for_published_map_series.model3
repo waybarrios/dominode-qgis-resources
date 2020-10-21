@@ -1,0 +1,185 @@
+<!DOCTYPE model>
+<Option type="Map">
+  <Option type="Map" name="children">
+    <Option type="Map" name="qgis:fieldcalculator_1">
+      <Option value="true" type="bool" name="active"/>
+      <Option name="alg_config"/>
+      <Option value="qgis:fieldcalculator" type="QString" name="alg_id"/>
+      <Option value="Field calculator" type="QString" name="component_description"/>
+      <Option value="430" type="double" name="component_pos_x"/>
+      <Option value="405" type="double" name="component_pos_y"/>
+      <Option type="StringList" name="dependencies">
+        <Option value="script:resourcenamevalidator_1" type="QString"/>
+      </Option>
+      <Option value="qgis:fieldcalculator_1" type="QString" name="id"/>
+      <Option type="Map" name="outputs">
+        <Option type="Map" name="Index sheet for published topomap">
+          <Option value="qgis:fieldcalculator_1" type="QString" name="child_id"/>
+          <Option value="Index sheet for published topomap" type="QString" name="component_description"/>
+          <Option value="630" type="double" name="component_pos_x"/>
+          <Option value="450" type="double" name="component_pos_y"/>
+          <Option type="invalid" name="default_value"/>
+          <Option value="false" type="bool" name="mandatory"/>
+          <Option value="Index sheet for published topomap" type="QString" name="name"/>
+          <Option value="OUTPUT" type="QString" name="output_name"/>
+        </Option>
+      </Option>
+      <Option value="true" type="bool" name="outputs_collapsed"/>
+      <Option value="true" type="bool" name="parameters_collapsed"/>
+      <Option type="Map" name="params">
+        <Option type="List" name="FIELD_LENGTH">
+          <Option type="Map">
+            <Option value="2" type="int" name="source"/>
+            <Option value="0" type="int" name="static_value"/>
+          </Option>
+        </Option>
+        <Option type="List" name="FIELD_NAME">
+          <Option type="Map">
+            <Option value="2" type="int" name="source"/>
+            <Option value="download_url" type="QString" name="static_value"/>
+          </Option>
+        </Option>
+        <Option type="List" name="FIELD_PRECISION">
+          <Option type="Map">
+            <Option value="2" type="int" name="source"/>
+            <Option value="0" type="int" name="static_value"/>
+          </Option>
+        </Option>
+        <Option type="List" name="FIELD_TYPE">
+          <Option type="Map">
+            <Option value="2" type="int" name="source"/>
+            <Option value="2" type="int" name="static_value"/>
+          </Option>
+        </Option>
+        <Option type="List" name="FORMULA">
+          <Option type="Map">
+            <Option value="2" type="int" name="source"/>
+            <Option value="format(&#xa;    '%1/dominode-topomaps/%2/series-%3/%4/',&#xa;&#x9; @DomiNodebaseURL,&#xa;&#x9; @Versionofthetopomapthatisbeingpublished,&#xa;&#x9; array_last(&#xa;&#x9;     string_to_array( @Validate_input_name_OUTPUT_DATASET_ID, '-')&#xa;&#x9; ),&#xa;&#x9; attribute( @sheetid )&#xa;)" type="QString" name="static_value"/>
+          </Option>
+        </Option>
+        <Option type="List" name="INPUT">
+          <Option type="Map">
+            <Option value="inputindesheetlayer" type="QString" name="parameter_name"/>
+            <Option value="0" type="int" name="source"/>
+          </Option>
+        </Option>
+        <Option type="List" name="NEW_FIELD">
+          <Option type="Map">
+            <Option value="2" type="int" name="source"/>
+            <Option value="true" type="bool" name="static_value"/>
+          </Option>
+        </Option>
+      </Option>
+    </Option>
+    <Option type="Map" name="script:resourcenamevalidator_1">
+      <Option value="true" type="bool" name="active"/>
+      <Option name="alg_config"/>
+      <Option value="script:resourcenamevalidator" type="QString" name="alg_id"/>
+      <Option value="Validate input name" type="QString" name="component_description"/>
+      <Option value="127" type="double" name="component_pos_x"/>
+      <Option value="287" type="double" name="component_pos_y"/>
+      <Option name="dependencies"/>
+      <Option value="script:resourcenamevalidator_1" type="QString" name="id"/>
+      <Option name="outputs"/>
+      <Option value="false" type="bool" name="outputs_collapsed"/>
+      <Option value="true" type="bool" name="parameters_collapsed"/>
+      <Option type="Map" name="params">
+        <Option type="List" name="INPUT_LAYER">
+          <Option type="Map">
+            <Option value="inputindesheetlayer" type="QString" name="parameter_name"/>
+            <Option value="0" type="int" name="source"/>
+          </Option>
+        </Option>
+        <Option type="List" name="INPUT_NAME">
+          <Option type="Map">
+            <Option value="2" type="int" name="source"/>
+            <Option value="" type="QString" name="static_value"/>
+          </Option>
+        </Option>
+      </Option>
+    </Option>
+  </Option>
+  <Option name="help"/>
+  <Option name="modelVariables"/>
+  <Option value="DomiNode" type="QString" name="model_group"/>
+  <Option value="Generate index sheet for published map series" type="QString" name="model_name"/>
+  <Option type="Map" name="parameterDefinitions">
+    <Option type="Map" name="DomiNodebaseURL">
+      <Option value="https://dominode.dm" type="QString" name="default"/>
+      <Option value="DomiNode base URL" type="QString" name="description"/>
+      <Option value="0" type="int" name="flags"/>
+      <Option name="metadata"/>
+      <Option value="false" type="bool" name="multiline"/>
+      <Option value="DomiNodebaseURL" type="QString" name="name"/>
+      <Option value="string" type="QString" name="parameter_type"/>
+    </Option>
+    <Option type="Map" name="Versionofthetopomapthatisbeingpublished">
+      <Option value="0.0.0" type="QString" name="default"/>
+      <Option value="Version of the topomap that is being published" type="QString" name="description"/>
+      <Option value="0" type="int" name="flags"/>
+      <Option name="metadata"/>
+      <Option value="false" type="bool" name="multiline"/>
+      <Option value="Versionofthetopomapthatisbeingpublished" type="QString" name="name"/>
+      <Option value="string" type="QString" name="parameter_type"/>
+    </Option>
+    <Option type="Map" name="inputindesheetlayer">
+      <Option type="List" name="data_types">
+        <Option value="2" type="int"/>
+      </Option>
+      <Option type="invalid" name="default"/>
+      <Option value="Input index sheet layer" type="QString" name="description"/>
+      <Option value="0" type="int" name="flags"/>
+      <Option name="metadata"/>
+      <Option value="inputindesheetlayer" type="QString" name="name"/>
+      <Option value="vector" type="QString" name="parameter_type"/>
+    </Option>
+    <Option type="Map" name="qgis:fieldcalculator_1:Index sheet for published topomap">
+      <Option value="true" type="bool" name="create_by_default"/>
+      <Option value="-1" type="int" name="data_type"/>
+      <Option type="invalid" name="default"/>
+      <Option value="Index sheet for published topomap" type="QString" name="description"/>
+      <Option value="0" type="int" name="flags"/>
+      <Option name="metadata"/>
+      <Option value="qgis:fieldcalculator_1:Index sheet for published topomap" type="QString" name="name"/>
+      <Option value="sink" type="QString" name="parameter_type"/>
+      <Option value="true" type="bool" name="supports_non_file_outputs"/>
+    </Option>
+    <Option type="Map" name="sheetid">
+      <Option value="false" type="bool" name="allow_multiple"/>
+      <Option value="1" type="int" name="data_type"/>
+      <Option type="invalid" name="default"/>
+      <Option value="Index sheet id" type="QString" name="description"/>
+      <Option value="0" type="int" name="flags"/>
+      <Option name="metadata"/>
+      <Option value="sheetid" type="QString" name="name"/>
+      <Option value="field" type="QString" name="parameter_type"/>
+      <Option value="inputindesheetlayer" type="QString" name="parent_layer"/>
+    </Option>
+  </Option>
+  <Option type="Map" name="parameters">
+    <Option type="Map" name="DomiNodebaseURL">
+      <Option value="DomiNodebaseURL" type="QString" name="component_description"/>
+      <Option value="607" type="double" name="component_pos_x"/>
+      <Option value="41" type="double" name="component_pos_y"/>
+      <Option value="DomiNodebaseURL" type="QString" name="name"/>
+    </Option>
+    <Option type="Map" name="Versionofthetopomapthatisbeingpublished">
+      <Option value="Versionofthetopomapthatisbeingpublished" type="QString" name="component_description"/>
+      <Option value="840" type="double" name="component_pos_x"/>
+      <Option value="45" type="double" name="component_pos_y"/>
+      <Option value="Versionofthetopomapthatisbeingpublished" type="QString" name="name"/>
+    </Option>
+    <Option type="Map" name="inputindesheetlayer">
+      <Option value="inputindesheetlayer" type="QString" name="component_description"/>
+      <Option value="120" type="double" name="component_pos_x"/>
+      <Option value="60" type="double" name="component_pos_y"/>
+      <Option value="inputindesheetlayer" type="QString" name="name"/>
+    </Option>
+    <Option type="Map" name="sheetid">
+      <Option value="sheetid" type="QString" name="component_description"/>
+      <Option value="359" type="double" name="component_pos_x"/>
+      <Option value="34" type="double" name="component_pos_y"/>
+      <Option value="sheetid" type="QString" name="name"/>
+    </Option>
+  </Option>
+</Option>
