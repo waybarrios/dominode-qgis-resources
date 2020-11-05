@@ -54,7 +54,7 @@
         <Option type="List" name="FORMULA">
           <Option type="Map">
             <Option value="2" type="int" name="source"/>
-            <Option value="format(&#xa;    '%1/dominode-topomaps/%2/series-%3/%4/',&#xa;&#x9; @DomiNodebaseURL,&#xa;&#x9; @Versionofthetopomapthatisbeingpublished,&#xa;&#x9; array_last(&#xa;&#x9;     string_to_array( @Validate_input_name_OUTPUT_DATASET_ID, '-')&#xa;&#x9; ),&#xa;&#x9; attribute( @sheetid )&#xa;)" type="QString" name="static_value"/>
+            <Option value="format(&#xa;    '%1/dominode-topomaps/v%2/series-%3/%4/',&#xa;&#x9; @DomiNodebaseURL,&#xa;&#x9; @Versionofthetopomapthatisbeingpublished,&#xa;&#x9; array_last(&#xa;&#x9;     string_to_array( @Validate_input_name_OUTPUT_DATASET_ID, '-')&#xa;&#x9; ),&#xa;&#x9; attribute( @sheetid )&#xa;)" type="QString" name="static_value"/>
           </Option>
         </Option>
         <Option type="List" name="INPUT">
