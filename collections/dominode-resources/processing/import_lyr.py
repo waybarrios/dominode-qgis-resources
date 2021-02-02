@@ -96,8 +96,9 @@ class ImportVectorLayer(QgsProcessingAlgorithm):
         # set staging permissions
         schema_out = outputs['ValidateResourceName']['OUTPUT_DB_STAGING_SCHEMA_NAME']
         table_out = outputs['ValidateResourceName']['OUTPUT_DATASET_NAME']
+        query = "SELECT DomiNodeSetStagingPermissions('%s.\"%s\"')" % (schema_out,table_out)
         cursor = connection.cursor()
-        cursor.execute("SELECT DomiNodeSetStagingPermissions('{}.{}');".format(schema_out,table_out))
+        cursor.execute(query)
         record = cursor.fetchone()
         cursor.close()
         return results
